@@ -2,7 +2,7 @@
     <div>
         <div v-if="displayAudits">
             <div class="flex flex-row items-center justify-between">
-                <h2 class="mb-3 text-90 font-normal text-2xl">{{ __('Audit Log') }}</h2>
+                <h2 class="font-normal text-xl md:text-xl mb-3">{{ __('Audit Log') }}</h2>
                 <DefaultButton class="btn btn-default btn-primary ml-4 mb-2" @click.prevent="close" v-if="displayAudits">
                     {{ __('Close Audit Log') }}
                 </DefaultButton>
@@ -122,9 +122,13 @@
             {{ __('View Audit Log') }}
         </DefaultButton>
 
-        <restore-audit-modal v-if="restore !== null" :fields="parentFields" :resourceName="resourceName"
+        <portal to="modals" v-if="restore !== null">
+            <transition name="fade">
+                <restore-audit-modal :fields="parentFields" :resourceName="resourceName"
                              :resourceId="resourceId" :audit="restore" @close="restore = null" @restored="restored">
-        </restore-audit-modal>
+                </restore-audit-modal>
+            </transition>
+        </portal>
     </div>
 </template>
 
