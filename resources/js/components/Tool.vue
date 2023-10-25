@@ -182,7 +182,9 @@ export default {
                 const {data} = await Nova.request().get(page);
                 this.audits = data.audits.data;
                 this.pagination = data.audits;
-                this.canRestore = data.restore;
+                // this.canRestore = data.restore;
+                // the audit modal is wonky as heck and I'm not learning Vue again to fix it
+                this.canRestore = false;
             } catch (e) {
                 // Do nothing, nova handles errors
             }
