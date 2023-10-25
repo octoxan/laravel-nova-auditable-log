@@ -2,72 +2,72 @@
     <div>
         <div v-if="displayAudits">
             <div class="flex flex-row items-center justify-between">
-                <h2 class="font-normal text-xl md:text-xl mb-3">{{ __('Audit Log') }}</h2>
-                <DefaultButton class="btn btn-default btn-primary ml-4 mb-2" @click.prevent="close" v-if="displayAudits">
+                <h2 class="md:text-xl mb-3 text-xl font-normal">{{ __('Audit Log') }}</h2>
+                <DefaultButton class="btn btn-default btn-primary mb-2 ml-4" @click.prevent="close" v-if="displayAudits">
                     {{ __('Close Audit Log') }}
                 </DefaultButton>
             </div>
             <div class="card">
-                <table data-testid="resource-table" class="table w-full rounded-lg overflow-hidden shadow">
+                <table data-testid="resource-table" class="table w-full overflow-hidden rounded-lg shadow">
                     <thead class="bg-gray-50 dark:bg-gray-700">
                     <tr>
                         <th></th>
-                        <th class="text-left text-gray-500 dark:text-gray-400 py-2"><span> {{ __('User') }} </span></th>
-                        <th class="text-left text-gray-500 dark:text-gray-400 py-2"><span> {{ __('Event') }} </span></th>
-                        <th class="text-left text-gray-500 dark:text-gray-400 py-2"><span> {{ __('Date/Time') }} </span></th>
-                        <th class="text-left text-gray-500 dark:text-gray-400 py-2"><span> {{ __('Old Values') }} </span></th>
-                        <th class="text-left text-gray-500 dark:text-gray-400 py-2"><span> {{ __('New Values') }} </span></th>
-                        <th class="text-gray-500 py-2" v-if="canRestore"></th>
+                        <th class="dark:text-gray-400 py-2 text-left text-gray-500"><span> {{ __('User') }} </span></th>
+                        <th class="dark:text-gray-400 py-2 text-left text-gray-500"><span> {{ __('Event') }} </span></th>
+                        <th class="dark:text-gray-400 py-2 text-left text-gray-500"><span> {{ __('Date/Time') }} </span></th>
+                        <th class="dark:text-gray-400 py-2 text-left text-gray-500"><span> {{ __('Old Values') }} </span></th>
+                        <th class="dark:text-gray-400 py-2 text-left text-gray-500"><span> {{ __('New Values') }} </span></th>
+                        <th class="py-2 text-gray-500" v-if="canRestore"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="group bg-white dark:bg-gray-800" v-for="audit in audits">
-                        <td class="py-2 border-t border-gray-100 dark:border-gray-800">
+                    <tr class="group dark:bg-gray-800 bg-white" v-for="audit in audits">
+                        <td class="dark:border-gray-800 py-2 border-t border-gray-100">
                             <div class="px-4">
                                 <svg v-if="audit.event === 'created'" aria-hidden="true" focusable="false" data-prefix="fas"
-                                     data-icon="save" class="h-4 text-60 svg-inline--fa fa-save fa-w-14" role="img"
+                                     data-icon="save" class="text-60 svg-inline--fa fa-save fa-w-14 h-4" role="img"
                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path fill="currentColor"
                                           d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path>
                                 </svg>
                                 <svg v-if="audit.event === 'updated'" aria-hidden="true" focusable="false" data-prefix="fas"
-                                     data-icon="save" class="h-4 text-60 svg-inline--fa fa-save fa-w-14" role="img"
+                                     data-icon="save" class="text-60 svg-inline--fa fa-save fa-w-14 h-4" role="img"
                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path fill="currentColor"
                                           d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path>
                                 </svg>
                                 <svg v-if="audit.event === 'deleted'" aria-hidden="true" focusable="false" data-prefix="fas"
-                                     data-icon="trash-alt" class="h-4 text-60 svg-inline--fa fa-trash-alt fa-w-14"
+                                     data-icon="trash-alt" class="text-60 svg-inline--fa fa-trash-alt fa-w-14 h-4"
                                      role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path fill="currentColor"
                                           d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path>
                                 </svg>
                             </div>
                         </td>
-                        <td class="py-2 border-t border-gray-100 dark:border-gray-800">
+                        <td class="dark:border-gray-800 py-2 border-t border-gray-100">
                             {{ audit.user ? audit.user.name : __('console') }}
                         </td>
-                        <td class="py-2 border-t border-gray-100 dark:border-gray-800">
+                        <td class="dark:border-gray-800 py-2 border-t border-gray-100">
                             {{ audit.event }}
                         </td>
-                        <td class="py-2 border-t border-gray-100 dark:border-gray-800">
-                            {{ audit.created_at }}
+                        <td class="dark:border-gray-800 py-2 border-t border-gray-100">
+                            {{ formatTimestamp(audit.created_at) }}
                         </td>
-                        <td class="py-2 border-t border-gray-100 dark:border-gray-800">
+                        <td class="dark:border-gray-800 py-2 border-t border-gray-100">
                             <div v-for="old_value in formatData(audit.old_values)" class="my-2">
-                                <span class="inline-block bg-30 p-1 rounded-sm mr-2 font-bold">{{ old_value.name }}</span> {{
+                                <span class="bg-30 inline-block p-1 mr-2 font-bold rounded-sm">{{ old_value.name }}</span> {{
                                     old_value.value
                                 }}
                             </div>
                         </td>
-                        <td class="py-2 border-t border-gray-100 dark:border-gray-800">
+                        <td class="dark:border-gray-800 py-2 border-t border-gray-100">
                             <div v-for="new_value in formatData(audit.new_values)" class="my-2">
-                                <span class="inline-block bg-30 p-1 rounded-sm mr-2 font-bold">{{ new_value.name }}</span> {{
+                                <span class="bg-30 inline-block p-1 mr-2 font-bold rounded-sm">{{ new_value.name }}</span> {{
                                     new_value.value
                                 }}
                             </div>
                         </td>
-                        <td class="py-2 text-center border-t border-gray-100 dark:border-gray-800"
+                        <td class="dark:border-gray-800 py-2 text-center border-t border-gray-100"
                             v-if="canRestore">
                             <svg @click="showRestoreAudit(audit)" style="max-width: 20px;"
                                  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
@@ -98,19 +98,19 @@
                 </table>
                 <div class="bg-20 rounded-b" per-page="5" resource-count-label="1-3 of 3" current-resource-count="3"
                      all-matching-resource-count="3">
-                    <nav class="flex justify-between items-center">
+                    <nav class="flex items-center justify-between">
                         <button :disabled="pagination.prev_page_url === null" rel="prev" dusk="previous"
-                                class="btn btn-link py-3 px-4 text-80"
+                                class="btn btn-link text-80 px-4 py-3"
                                 :class="{ 'opacity-50': pagination.prev_page_url === null, 'text-primary': pagination.prev_page_url !== null }"
                                 @click="fetchAudits(pagination.prev_page_url)">
                             {{ __('Previous') }}
                         </button>
-                        <span class="text-sm text-80 px-4">
+                        <span class="text-80 px-4 text-sm">
                     {{ pagination.from }}-{{ pagination.to }} of {{ pagination.total }}
                 </span>
                         <button :disabled="pagination.next_page_url === null" rel="next" dusk="next"
                                 :class="{ 'opacity-50': pagination.next_page_url === null, 'text-primary': pagination.next_page_url !== null }"
-                                class="btn btn-link py-3 px-4 text-80" @click="fetchAudits(pagination.next_page_url)">
+                                class="btn btn-link text-80 px-4 py-3" @click="fetchAudits(pagination.next_page_url)">
                             {{ __('Next') }}
                         </button>
                     </nav>
@@ -186,6 +186,22 @@ export default {
             } catch (e) {
                 // Do nothing, nova handles errors
             }
+        },
+
+        formatTimestamp(timestamp) {
+            if (timestamp) {
+                const date = new Date(timestamp);
+                const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                };
+                return date.toLocaleString('en-US', options);
+            }
+            return '';
         },
 
         formatData(values) {
