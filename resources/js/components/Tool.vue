@@ -45,7 +45,7 @@
                             </div>
                         </td>
                         <td class="dark:border-gray-800 py-2 border-t border-gray-100">
-                            {{ audit.user ? audit.user.name : __('console') }}
+                            {{ audit.user ? audit.user.first_name : __('console') }} {{ audit.user ? audit.user.last_name : '' }}
                         </td>
                         <td class="dark:border-gray-800 py-2 border-t border-gray-100">
                             {{ audit.event }}
