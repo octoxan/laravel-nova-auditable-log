@@ -45,7 +45,9 @@
                             </div>
                         </td>
                         <td class="dark:border-gray-800 py-2 border-t border-gray-100">
-                            {{ audit.user ? audit.user.first_name : __('console') }} {{ audit.user ? audit.user.last_name : '' }}
+                            <span v-if="audit.user && audit.user.name">{{ audit.user.name }}</span>
+                            <span v-if="audit.user && audit.user.first_name">{{ audit.user.first_name }} {{ audit.user.last_name }}</span>
+                            <span v-if="!audit.user">{{ __('console') }}</span>
                         </td>
                         <td class="dark:border-gray-800 py-2 border-t border-gray-100">
                             {{ audit.event }}
